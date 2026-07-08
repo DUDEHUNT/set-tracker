@@ -18,7 +18,7 @@
     --ink:#1B1F24; --muted:#6B7480; --faint:#A2AAB3;
     --line:#DCE1E6; --line-soft:#EAEEF1;
     --accent:#2D5BA0; --accent-ink:#1E3F73;
-    --good:#1E8A55; --bad:#CF3B33; --warn:#C07A12; --done:#5B6470;
+    --good:#1E8A55; --bad:#CF3B33; --warn:#C07A12; --done:#5B6470; --pri:#2563EB;
     --radius:16px;
     --mono:'Space Mono', ui-monospace, monospace;
     --disp:'Space Grotesk', system-ui, sans-serif;
@@ -52,8 +52,8 @@
   .btn svg{width:16px;height:16px}
 
   .controls{display:flex;align-items:center;gap:10px;padding:13px 0 4px;flex-wrap:wrap}
-  .seg{display:inline-flex;background:var(--surface-2);border:1px solid var(--line);border-radius:11px;padding:3px}
-  .seg button{padding:7px 14px;border-radius:8px;font-weight:600;font-size:13.5px;color:var(--muted);transition:all .14s}
+  .seg{display:inline-flex;background:var(--surface-2);border:1px solid var(--line);border-radius:11px;padding:3px;max-width:100%;overflow-x:auto}
+  .seg button{flex:none;padding:7px 14px;border-radius:8px;font-weight:600;font-size:13.5px;color:var(--muted);transition:all .14s;white-space:nowrap}
   .seg button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
   .spacer{flex:1}
   .window-ctl{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:6px 9px}
@@ -95,8 +95,30 @@
   .row .d.late{color:var(--bad);font-weight:700}
   .row .d.empty{color:var(--faint)}
   .row .d.dn{color:var(--done)}
+  .row .d.pred{color:#8A7CC0;font-style:italic}
   .row .d .ck{color:var(--good);font-weight:700}
   .row .d .more{color:var(--faint);font-size:11px}
+  .row .d.pri{color:var(--pri);font-weight:700}
+  .row .pn.pri{color:var(--pri)}
+  .pstar{color:var(--pri);font-size:10px;margin-right:2px}
+  .pri-toggle{width:32px;height:32px;border-radius:9px;border:1.5px solid var(--line);background:var(--surface);color:var(--faint);display:grid;place-items:center;font-size:15px;flex:none}
+  .pri-toggle.on{background:var(--pri);border-color:var(--pri);color:#fff}
+  .d-pn.pri{color:var(--pri)}
+  .pri-btn{width:100%;justify-content:center;padding:11px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);color:var(--muted);font-weight:600;font-size:14px;margin-bottom:15px;display:inline-flex;align-items:center;gap:7px}
+  .pri-btn.on{background:rgba(37,99,235,.1);border-color:var(--pri);color:var(--pri)}
+  .sched{margin-top:16px;background:var(--surface-2);border:1px solid var(--line-soft);border-radius:12px;padding:13px 14px}
+  .sched-h{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .sched-grid{display:grid;grid-template-columns:auto 1fr;gap:7px 14px;align-items:baseline}
+  .sched-grid .sk{font-size:12.5px;color:var(--muted)}
+  .sched-grid .sv{font-family:var(--mono);font-size:13.5px;font-weight:700;text-align:right}
+  .sched-grid .sv.hl{color:var(--accent)}
+  .sched-grid .sv.late{color:var(--bad)}
+  .sfaint{color:var(--faint);font-family:var(--body);font-weight:400;font-size:12px}
+  .sched-foot{margin-top:11px;padding-top:9px;border-top:1px solid var(--line);font-size:11px;color:var(--faint);font-family:var(--mono);line-height:1.5}
+  .dl-chip{font-family:var(--mono);font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;text-transform:none;letter-spacing:0}
+  .dl-chip.r{background:rgba(207,59,51,.12);color:var(--bad)} .dl-chip.g{background:rgba(30,138,85,.12);color:var(--good)} .dl-chip.w{background:rgba(192,122,18,.13);color:var(--warn)}
+  .row .dl{font-family:var(--mono);font-size:13px;text-align:right;white-space:nowrap}
+  .row .dl.r{color:var(--bad);font-weight:700} .row .dl.g{color:var(--good)} .row .dl.w{color:var(--warn)} .row .dl.n{color:var(--faint)}
 
   .empty-state{text-align:center;padding:54px 20px;color:var(--muted)}
   .empty-state svg{width:42px;height:42px;color:var(--faint);margin-bottom:12px}
@@ -134,6 +156,7 @@
   .d-comp .val{font-family:var(--mono);font-weight:700;font-size:14px;white-space:nowrap}
   .d-comp .val.late{color:var(--bad)} .d-comp .val.empty{color:var(--faint);font-weight:400}
   .d-comp .val.dn{color:var(--done)}
+  .d-comp .val.pred{color:#8A7CC0;font-style:italic;font-weight:600}
   .d-comp .gap{font-family:var(--mono);font-size:11px;color:var(--faint);width:54px;text-align:right}
   .d-comp .gap.late{color:var(--bad);font-weight:700}
   .ck-btn{flex:none;width:30px;height:30px;border-radius:9px;border:1.5px solid var(--line);background:var(--surface);color:var(--faint);display:grid;place-items:center;font-weight:700;font-size:15px;transition:all .12s}
@@ -147,7 +170,7 @@
   .field input[type=date]{font-family:var(--mono);font-size:14px}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
-  .pf-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line-soft)}
+  .pf-row{display:flex;align-items:center;gap:10px}
   .pf-row:first-child{border-top:none}
   .pf-lab{width:108px;flex:none;font-size:13px;font-weight:500}
   .pf-lab em{color:var(--faint);font-style:normal;font-size:11px}
@@ -169,6 +192,24 @@
   .part-line select{flex:none;width:96px;padding:8px 6px;border:1px solid var(--line);border-radius:8px;font-size:12.5px;color:var(--ink);background:var(--surface)}
   .part-line .opt{flex:none;display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--muted);white-space:nowrap}
   .part-line .px{width:28px;height:28px;flex:none;border-radius:8px;background:var(--surface-2);color:var(--faint);display:grid;place-items:center}
+  .part-line .st-name{flex:1}
+  .part-line .st-days{flex:none;width:56px;padding:8px 6px;border:1px solid var(--line);border-radius:8px;font-family:var(--mono);font-size:13px;text-align:center;color:var(--ink)}
+  .part-line .st-d{font-size:12px;color:var(--faint);margin:0 2px 0 -3px}
+  .cc-stage-h{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:700;margin:12px 0 8px;padding-top:11px;border-top:1px solid var(--line-soft)}
+  .cc-stage-h span{text-transform:none;letter-spacing:0;color:var(--faint);font-weight:400}
+  .cc-hint{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);margin:2px 0 7px}
+  .part-line .pl-days{flex:none;width:44px;padding:8px 4px;border:1px solid var(--line);border-radius:8px;font-family:var(--mono);font-size:13px;text-align:center;color:var(--ink)}
+  .var-area{display:flex;flex-wrap:wrap;gap:8px}
+  .vchip{border:1.5px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:8px 13px;font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:6px}
+  .vchip .vd{font-family:var(--mono);font-size:11px;color:var(--faint)}
+  .vchip.on{background:rgba(45,91,160,.1);border-color:var(--accent);color:var(--accent)}
+  .vchip.on .vd{color:var(--accent)}
+  .pf-block{padding:10px 0;border-top:1px solid var(--line-soft)}
+  .pf-block:first-child{border-top:none}
+  .pf-vars{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;padding-left:2px}
+  .vchip.sm{padding:5px 10px;font-size:12px;border-radius:8px}
+  .pl-sub{color:var(--faint);font-size:11px;font-style:normal;line-height:1.5}
+  .d-comp .lab{line-height:1.35}
   .addpart{font-size:12.5px;color:var(--accent);font-weight:600;padding:4px 0}
 
   .menu{position:absolute;right:13px;top:60px;background:var(--surface);border:1px solid var(--line);border-radius:13px;box-shadow:0 8px 30px -10px rgba(0,0,0,.3);padding:6px;z-index:40;display:none;min-width:196px}
@@ -215,6 +256,7 @@
 
 <div class="menu" id="menu">
   <button id="catMgrBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="1.6" fill="currentColor"/><circle cx="15" cy="12" r="1.6" fill="currentColor"/><circle cx="7" cy="18" r="1.6" fill="currentColor"/></svg> Manage categories</button>
+  <button id="stagesBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Production stages</button>
   <div class="sep"></div>
   <button id="sampleBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg> Load sample data</button>
   <button id="exportBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg> Export JSON</button>
@@ -228,7 +270,9 @@
   <div class="controls">
     <div class="seg" id="viewSeg">
       <button data-view="grouped" class="on">By category</button>
-      <button data-view="flat">All in one</button>
+      <button data-view="flat">All</button>
+      <button data-view="priority">Priority</button>
+      <button data-view="delays">Delays</button>
     </div>
     <div class="spacer"></div>
     <label class="window-ctl">window <input type="number" id="windowInput" min="1" max="60" value="7"> d</label>
@@ -254,7 +298,9 @@
         <div class="field"><label for="fPattern">Pattern no.</label><input type="text" id="fPattern" placeholder="e.g. 1160" autocomplete="off"></div>
         <div class="field"><label for="fCat">Category</label><select id="fCat"></select></div>
       </div>
-      <div class="pf-head">Pieces — date &amp; ✓ when done</div>
+      <button type="button" class="pri-btn" id="fPriority">★ Mark as priority</button>
+      <div class="field"><label for="fDispatch">Dispatch by <span style="color:var(--faint);text-transform:none;letter-spacing:0">(optional — drives the schedule)</span></label><input type="date" id="fDispatch"></div>
+      <div class="pf-head">Pieces — date, ✓ when done, and the processes each piece needs</div>
       <div id="partsArea"></div>
       <div class="field" style="margin-top:15px"><label for="fNote">Note (optional)</label><input type="text" id="fNote" placeholder="Lot ref, karigar, remark…" autocomplete="off"></div>
       <div class="mfoot">
@@ -267,6 +313,19 @@
       <div id="catList"></div>
       <button class="btn ghost" id="addCatBtn" style="width:100%;justify-content:center;margin-top:4px">+ Add category</button>
       <div class="mfoot"><button class="btn primary" id="catDoneBtn" style="flex:1;justify-content:center">Done</button></div>
+    </div>
+
+    <div class="mbody hide" id="stagesBody">
+      <div class="field" style="margin-bottom:16px">
+        <label for="fBuffer">Dispatch buffer (days before dispatch the lot should be ready)</label>
+        <input type="number" id="fBuffer" min="0" max="60" style="width:90px">
+      </div>
+      <div class="pf-head">Fixed stages — applied to every design</div>
+      <div id="baseStages"></div>
+      <div class="pf-head" style="margin-top:18px">Variable stages — the library designs pick from</div>
+      <div id="varStagesList"></div>
+      <div style="font-size:11.5px;color:var(--faint);margin-top:12px;line-height:1.5">Each component's own make-time is set per piece in <b>Manage categories</b>.</div>
+      <div class="mfoot"><button class="btn primary" id="stagesDoneBtn" style="flex:1;justify-content:center">Done</button></div>
     </div>
 
     <div class="mbody hide" id="confirmBody">
@@ -303,38 +362,51 @@ const ROLE_ORDER=['main','inner','bottoms','extra'];
 function defaultCategories(){
   return [
     {id:'cat_wc', name:'Waistcoat', parts:[
-      {key:'p_wc', label:'Waistcoat', role:'main', optional:false},
-      {key:'p_sh', label:'Shirt', role:'inner', optional:false},
-      {key:'p_pt', label:'Pant', role:'bottoms', optional:false},
-      {key:'p_bow', label:'Bow', role:'extra', optional:true},
+      {key:'p_wc', label:'Waistcoat', role:'main', optional:false, days:5},
+      {key:'p_sh', label:'Shirt', role:'inner', optional:false, days:3},
+      {key:'p_pt', label:'Pant', role:'bottoms', optional:false, days:4},
+      {key:'p_bow', label:'Bow', role:'extra', optional:true, days:1},
     ]},
     {id:'cat_bz', name:'Blazer', parts:[
-      {key:'p_bz', label:'Blazer', role:'main', optional:false},
-      {key:'p_ts', label:'T-shirt', role:'inner', optional:false},
-      {key:'p_pt', label:'Pant', role:'bottoms', optional:false},
-      {key:'p_sh', label:'Shirt', role:'extra', optional:true},
+      {key:'p_bz', label:'Blazer', role:'main', optional:false, days:6},
+      {key:'p_ts', label:'T-shirt', role:'inner', optional:false, days:2},
+      {key:'p_pt', label:'Pant', role:'bottoms', optional:false, days:4},
+      {key:'p_sh', label:'Shirt', role:'extra', optional:true, days:3},
     ]},
     {id:'cat_bz5', name:'Blazer (5 pc)', parts:[
-      {key:'p_bz', label:'Blazer', role:'main', optional:false},
-      {key:'p_sh', label:'Shirt', role:'inner', optional:false},
-      {key:'p_pt', label:'Pant', role:'bottoms', optional:false},
-      {key:'p_bow', label:'Bow', role:'extra', optional:true},
-      {key:'p_wc', label:'Waistcoat', role:'extra', optional:true},
+      {key:'p_bz', label:'Blazer', role:'main', optional:false, days:6},
+      {key:'p_sh', label:'Shirt', role:'inner', optional:false, days:3},
+      {key:'p_pt', label:'Pant', role:'bottoms', optional:false, days:4},
+      {key:'p_bow', label:'Bow', role:'extra', optional:true, days:1},
+      {key:'p_wc', label:'Waistcoat', role:'extra', optional:true, days:5},
     ]},
     {id:'cat_jk', name:'Jacket', parts:[
-      {key:'p_jk', label:'Jacket', role:'main', optional:false},
-      {key:'p_ts', label:'T-shirt', role:'inner', optional:false},
-      {key:'p_pt', label:'Pant', role:'bottoms', optional:false},
+      {key:'p_jk', label:'Jacket', role:'main', optional:false, days:6},
+      {key:'p_ts', label:'T-shirt', role:'inner', optional:false, days:2},
+      {key:'p_pt', label:'Pant', role:'bottoms', optional:false, days:4},
     ]},
     {id:'cat_sus', name:'2 pc Suspenders', parts:[
-      {key:'p_sh', label:'Shirt', role:'inner', optional:false},
-      {key:'p_pt', label:'Pant', role:'bottoms', optional:false},
-      {key:'p_sus', label:'Suspenders', role:'extra', optional:true},
+      {key:'p_sh', label:'Shirt', role:'inner', optional:false, days:3},
+      {key:'p_pt', label:'Pant', role:'bottoms', optional:false, days:4},
+      {key:'p_sus', label:'Suspenders', role:'extra', optional:true, days:2},
     ]},
   ];
 }
+function defaultStages(){        // FIXED stages — applied to every design
+  return [
+    {id:'stg_qc', name:'Checking / QC', days:1},
+    {id:'stg_pack', name:'Packaging', days:2},
+  ];
+}
+function defaultVariableStages(){ // library of optional post-processes, chosen per design
+  return [
+    {id:'vs_wash', name:'Washing', days:7},
+    {id:'vs_print', name:'Screen printing', days:6},
+    {id:'vs_button', name:'Buttoning', days:2},
+  ];
+}
 
-let state={ sets:[], categories:[], view:'grouped', filter:'all', search:'', window:7 };
+let state={ sets:[], categories:[], stages:[], variableStages:[], buffer:3, view:'grouped', filter:'all', search:'', window:7 };
 let editingId=null;
 
 /* ============================================================
@@ -354,27 +426,27 @@ let cloud={ on:false, db:null, fns:null, knownIds:[], seeded:false };
 
 function load(){
   const raw=Store.get(KEY);
-  if(raw){ try{ const d=JSON.parse(raw); state.sets=d.sets||[]; state.categories=(d.categories&&d.categories.length)?d.categories:defaultCategories(); state.window=d.window||7; state.view=d.view||'grouped'; }catch(e){ state.categories=defaultCategories(); state.sets=sampleData(); } }
-  else { state.categories=defaultCategories(); state.sets=sampleData(); }
+  if(raw){ try{ const d=JSON.parse(raw); state.sets=d.sets||[]; state.categories=(d.categories&&d.categories.length)?d.categories:defaultCategories(); state.stages=(d.stages&&d.stages.length)?d.stages:defaultStages(); state.variableStages=(d.variableStages&&d.variableStages.length)?d.variableStages:defaultVariableStages(); state.buffer=(d.buffer!=null)?d.buffer:3; state.window=d.window||7; state.view=d.view||'grouped'; }catch(e){ state.categories=defaultCategories(); state.stages=defaultStages(); state.variableStages=defaultVariableStages(); state.sets=sampleData(); } }
+  else { state.categories=defaultCategories(); state.stages=defaultStages(); state.variableStages=defaultVariableStages(); state.sets=sampleData(); }
 }
-function save(){ Store.set(KEY, JSON.stringify({sets:state.sets, categories:state.categories, window:state.window, view:state.view})); cloudWriteMeta(); }
+function save(){ Store.set(KEY, JSON.stringify({sets:state.sets, categories:state.categories, stages:state.stages, variableStages:state.variableStages, buffer:state.buffer, window:state.window, view:state.view})); cloudWriteMeta(); }
 
 function sampleData(){
   const D=(d)=>'2024-10-'+String(d).padStart(2,'0');
   return [
-    {id:uid('s'),pattern:'1160',catId:'cat_wc',dates:{p_wc:D(1),p_sh:D(2),p_pt:D(1)},done:['p_wc','p_sh','p_pt'],note:'Lot A · 200 pc'},
-    {id:uid('s'),pattern:'1070',catId:'cat_wc',dates:{p_wc:D(2),p_sh:D(2),p_pt:D(8),p_bow:D(3)},done:['p_wc'],note:''},
+    {id:uid('s'),pattern:'1160',dispatch:D(8),catId:'cat_wc',dates:{p_wc:D(1),p_sh:D(2),p_pt:D(1)},done:['p_wc','p_sh','p_pt'],note:'Lot A · 200 pc'},
+    {id:uid('s'),pattern:'1070',dispatch:D(14),catId:'cat_wc',dates:{p_wc:D(2),p_sh:D(2),p_pt:D(8),p_bow:D(3)},done:['p_wc'],note:''},
     {id:uid('s'),pattern:'1228',catId:'cat_wc',dates:{p_wc:D(1),p_sh:D(3),p_pt:D(1)},done:[],note:''},
-    {id:uid('s'),pattern:'1213',catId:'cat_wc',dates:{p_wc:D(10),p_pt:D(11)},done:[],note:'shirt not cut'},
-    {id:uid('s'),pattern:'1185',catId:'cat_wc',dates:{p_wc:D(1),p_sh:D(11),p_pt:D(10)},done:[],note:'shirt late'},
+    {id:uid('s'),pattern:'1213',dispatch:D(13),catId:'cat_wc',dates:{p_wc:D(10),p_pt:D(11)},done:[],note:'shirt not cut'},
+    {id:uid('s'),pattern:'1185',dispatch:D(12),catId:'cat_wc',dates:{p_wc:D(1),p_sh:D(11),p_pt:D(10)},done:[],note:'shirt late',priority:true},
     {id:uid('s'),pattern:'1216',catId:'cat_wc',dates:{p_wc:D(11),p_sh:D(11),p_pt:D(11)},done:[],note:''},
     {id:uid('s'),pattern:'1025',catId:'cat_wc',dates:{p_wc:D(9),p_sh:D(4)},done:[],note:'pant pending'},
-    {id:uid('s'),pattern:'1234',catId:'cat_wc',dates:{p_wc:D(7),p_sh:D(11),p_pt:D(1)},done:[],note:''},
+    {id:uid('s'),pattern:'1234',dispatch:D(10),catId:'cat_wc',dates:{p_wc:D(7),p_sh:D(11),p_pt:D(1)},done:[],note:'',partVars:{p_sh:['vs_print']}},
     {id:uid('s'),pattern:'1208',catId:'cat_wc',dates:{p_wc:D(6),p_sh:D(6),p_pt:D(8),p_bow:D(7)},done:[],note:''},
     {id:uid('s'),pattern:'1190',catId:'cat_bz',dates:{p_bz:D(2),p_ts:D(4),p_pt:D(6),p_sh:D(5)},done:['p_bz','p_ts'],note:''},
     {id:uid('s'),pattern:'1402',catId:'cat_bz',dates:{p_bz:D(5),p_ts:D(9)},done:[],note:'bottoms not started'},
-    {id:uid('s'),pattern:'1310',catId:'cat_bz5',dates:{p_bz:D(1),p_sh:D(3),p_pt:D(5),p_bow:D(4),p_wc:D(6)},done:[],note:''},
-    {id:uid('s'),pattern:'1501',catId:'cat_jk',dates:{p_jk:D(2),p_ts:D(4),p_pt:D(5)},done:[],note:''},
+    {id:uid('s'),pattern:'1310',dispatch:D(18),catId:'cat_bz5',dates:{p_bz:D(1),p_sh:D(3),p_pt:D(5),p_bow:D(4),p_wc:D(6)},done:[],note:''},
+    {id:uid('s'),pattern:'1501',dispatch:D(20),catId:'cat_jk',dates:{p_jk:D(2),p_ts:D(4),p_pt:D(5)},done:[],note:'',priority:true,partVars:{p_jk:['vs_wash']}},
     {id:uid('s'),pattern:'1620',catId:'cat_sus',dates:{p_sh:D(3),p_pt:D(5),p_sus:D(4)},done:[],note:''},
   ];
 }
@@ -384,8 +456,40 @@ function days(a,b){ return Math.round((b-a)/86400000); }
 const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 function fmtShort(s){ const d=parseD(s); return d? d.getDate()+' '+MON[d.getMonth()] : '—'; }
 function fmtLong(s){ const d=parseD(s); return d? String(d.getDate()).padStart(2,'0')+' '+MON[d.getMonth()]+' '+String(d.getFullYear()).slice(2) : null; }
+function dateStr(d){ return d? d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0') : ''; }
 function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 function getCat(id){ return state.categories.find(c=>c.id===id) || {id:id,name:'(unknown)',parts:[]}; }
+function addDays(d,n){ const x=new Date(d.getTime()); x.setDate(x.getDate()+n); return x; }
+function fixedTotal(){ return (state.stages||[]).reduce((s,st)=>s+(parseInt(st.days,10)||0),0); }
+function partDays(part){ return parseInt(part&&part.days,10)||0; }
+function partVarStages(set,partKey){ const ids=((set.partVars||{})[partKey])||[]; return (state.variableStages||[]).filter(v=>ids.includes(v.id)); }
+function partVarDays(set,partKey){ return partVarStages(set,partKey).reduce((s,v)=>s+(parseInt(v.days,10)||0),0); }
+function partLead(set,part){ return partDays(part)+partVarDays(set,part.key); }  // make-time + this piece's own processes
+function schedule(set){
+  const cat=getCat(set.catId);
+  const parts=cat.parts||[];
+  const fixed=fixedTotal();
+  const leads={}; let maxLead=0;
+  parts.forEach(p=>{ const L=partLead(set,p); leads[p.key]=L; if(L>maxLead) maxLead=L; });
+  const lead=maxLead+fixed;
+  const buffer=parseInt(state.buffer,10)||0;
+  const disp=parseD(set.dispatch);
+  let expectedReady=null, startBy=null, compDeadline=null;
+  const partStartBy={};
+  if(disp){
+    expectedReady=addDays(disp,-buffer);              // whole design ready this many days before dispatch
+    compDeadline=addDays(expectedReady,-fixed);       // all components (incl. their processes) done by here
+    startBy=addDays(compDeadline,-maxLead);           // begin the whole design by here
+    parts.forEach(p=>{ partStartBy[p.key]=addDays(compDeadline,-leads[p.key]); });
+  }
+  const req=parts.filter(p=>!p.optional);
+  const allReq = req.length>0 && req.every(p=>parseD((set.dates||{})[p.key]));
+  let actualReady=null;
+  if(allReq){ actualReady=req.reduce((mx,p)=>{ const d=parseD(set.dates[p.key]); return (!mx||d>mx)?d:mx; }, null); }
+  let delay=null;
+  if(expectedReady && actualReady) delay=days(expectedReady, actualReady); // + = late
+  return {cat,parts,leads,maxLead,fixed,lead,buffer,disp,expectedReady,compDeadline,startBy,partStartBy,actualReady,delay,allReq};
+}
 
 function analyze(set){
   const cat=getCat(set.catId);
@@ -431,14 +535,32 @@ function render(){
   board.innerHTML='';
   if(rows.length===0){ renderEmpty(all.length===0); return; }
 
-  if(state.view==='flat'){
+  if(state.view==='delays'){ renderDelays(rows); return; }
+
+  if(state.view==='flat' || state.view==='priority'){
     const ch=document.createElement('div'); ch.className='col-head';
     ch.style.gridTemplateColumns=gridTpl(4); ch.style.minWidth=minW(4);
     ch.innerHTML=`<span></span><span>Pattern</span>`+ROLES.map(r=>`<span>${r.t}</span>`).join('');
     board.appendChild(ch);
-    const sheet=document.createElement('div'); sheet.className='sheet';
-    rows.sort(sortRows).forEach(x=> sheet.appendChild(rowFlat(x.s,x.a)));
-    board.appendChild(sheet);
+    if(state.view==='priority'){
+      const pri=rows.filter(x=>x.s.priority).sort(sortRows);
+      const rest=rows.filter(x=>!x.s.priority).sort(sortRows);
+      const section=(label,items,star)=>{
+        if(!items.length) return;
+        const t=document.createElement('div'); t.className='group-title';
+        t.innerHTML=`<span class="nm"${star?' style="color:var(--pri)"':''}>${star?'★ ':''}${label}</span><span class="ct">${items.length}</span>`;
+        board.appendChild(t);
+        const sheet=document.createElement('div'); sheet.className='sheet';
+        items.forEach(x=> sheet.appendChild(rowFlat(x.s,x.a)));
+        board.appendChild(sheet);
+      };
+      section('Priority', pri, true);
+      section('Others', rest, false);
+    } else {
+      const sheet=document.createElement('div'); sheet.className='sheet';
+      rows.sort(sortRows).forEach(x=> sheet.appendChild(rowFlat(x.s,x.a)));
+      board.appendChild(sheet);
+    }
   } else {
     const groups={}; rows.forEach(x=>{ (groups[x.s.catId]=groups[x.s.catId]||[]).push(x); });
     Object.keys(groups).sort((a,b)=>getCat(a).name.localeCompare(getCat(b).name)).forEach(catId=>{
@@ -457,43 +579,81 @@ function render(){
   }
 }
 
+function renderDelays(rows){
+  const ch=document.createElement('div'); ch.className='col-head';
+  ch.style.gridTemplateColumns='11px 54px 1fr 1fr 1fr 64px'; ch.style.minWidth='340px';
+  ch.innerHTML=`<span></span><span>Pattern</span><span>Dispatch</span><span>Exp. ready</span><span>Actual</span><span>Delay</span>`;
+  board.appendChild(ch);
+  const withSc=rows.map(x=>({x, sc:schedule(x.s)}));
+  // late first, then in-progress, then early/on-time, then no dispatch date
+  const rank=o=>{ if(o.sc.delay!=null) return o.sc.delay>0?0:2; if(o.sc.disp&&!o.sc.allReq) return 1; return 3; };
+  withSc.sort((a,b)=>{ const ra=rank(a),rb=rank(b); if(ra!==rb) return ra-rb; if(a.sc.delay!=null&&b.sc.delay!=null) return b.sc.delay-a.sc.delay; return a.x.s.pattern.localeCompare(b.x.s.pattern,undefined,{numeric:true}); });
+  const sheet=document.createElement('div'); sheet.className='sheet';
+  withSc.forEach(({x,sc})=>{
+    const el=document.createElement('div'); el.className='row';
+    el.style.gridTemplateColumns='11px 54px 1fr 1fr 1fr 64px'; el.style.minWidth='340px';
+    let dl='<span class="dl n">—</span>';
+    if(sc.delay!=null){ if(sc.delay>0) dl=`<span class="dl r">+${sc.delay}d</span>`; else if(sc.delay<0) dl=`<span class="dl g">${sc.delay}d</span>`; else dl='<span class="dl g">0d</span>'; }
+    else if(sc.disp&&!sc.allReq) dl='<span class="dl w">wip</span>';
+    el.innerHTML = stHtml(x.a)+pnHtml(x.s)
+      +`<span class="d${sc.disp?'':' empty'}">${sc.disp?fmtShort(x.s.dispatch):'—'}</span>`
+      +`<span class="d${sc.expectedReady?'':' empty'}">${sc.expectedReady?fmtShort(dateStr(sc.expectedReady)):'—'}</span>`
+      +`<span class="d${sc.actualReady?(sc.delay>0?' late':''):' empty'}">${sc.actualReady?fmtShort(dateStr(sc.actualReady)):'—'}</span>`
+      +dl;
+    el.addEventListener('click',()=>openDetail(x.s.id));
+    sheet.appendChild(el);
+  });
+  board.appendChild(sheet);
+}
 function sortRows(a,b){
+  const pa=a.s.priority?0:1, pb=b.s.priority?0:1;
+  if(pa!==pb) return pa-pb;
   const o={spread:0,incomplete:1,tight:2,done:3};
   if(o[a.a.status]!==o[b.a.status]) return o[a.a.status]-o[b.a.status];
   return a.s.pattern.localeCompare(b.s.pattern,undefined,{numeric:true});
 }
 function stHtml(a){ return a.status==='done'?`<span class="st done">✓</span>`:`<span class="st ${a.status}" title="${a.status}"></span>`; }
 
-function dcell(set,a,part){
+function dcell(set,a,part,sc){
   const key=part.key, c=a.cells[key], dateStr=(set.dates||{})[key];
   const done=(set.done||[]).includes(key);
-  if(!dateStr && !done) return `<span class="d empty">—</span>`;
-  const late=c&&c.state==='bad';
-  return `<span class="d ${late?'late':''} ${done?'dn':''}">${done?'<span class="ck">✓</span>':''}${dateStr?fmtShort(dateStr):''}</span>`;
+  if(done) return `<span class="d dn"><span class="ck">✓</span></span>`;   // ticked → just ✓
+  if(dateStr){
+    const late=c&&c.state==='bad';
+    const cls = late?'late':(set.priority?'pri':'');
+    return `<span class="d ${cls}">${fmtShort(dateStr)}</span>`;
+  }
+  // empty → predicted start-by (if a dispatch date lets us compute it)
+  const sb = sc && sc.partStartBy && sc.partStartBy[key];
+  if(sb) return `<span class="d pred" title="start by">▸${fmtShort(dateStr2(sb))}</span>`;
+  return `<span class="d empty">—</span>`;
 }
+function dateStr2(d){ return dateStr(d); }
+function pnHtml(set){ return `<span class="pn${set.priority?' pri':''}">${set.priority?'<span class="pstar">★</span>':''}${esc(set.pattern)}</span>`; }
 function rowGrouped(set,a){
   const el=document.createElement('div'); el.className='row'+(a.status==='done'?' is-done':'');
   el.style.gridTemplateColumns=gridTpl(a.parts.length); el.style.minWidth=minW(a.parts.length);
-  el.innerHTML=stHtml(a)+`<span class="pn">${esc(set.pattern)}</span>`+a.parts.map(p=>dcell(set,a,p)).join('');
+  const sc=schedule(set);
+  el.innerHTML=stHtml(a)+pnHtml(set)+a.parts.map(p=>dcell(set,a,p,sc)).join('');
   el.addEventListener('click',()=>openDetail(set.id));
   return el;
 }
 function rowFlat(set,a){
   const el=document.createElement('div'); el.className='row'+(a.status==='done'?' is-done':'');
   el.style.gridTemplateColumns=gridTpl(4); el.style.minWidth=minW(4);
+  const sc=schedule(set);
   let cells='';
   ROLE_ORDER.forEach(role=>{
     const ps=a.parts.filter(p=>p.role===role);
     if(ps.length===0){ cells+=`<span class="d empty">—</span>`; return; }
-    // first part with a date (or first part), plus +N if more dated
     const dated=ps.filter(p=>(set.dates||{})[p.key]||(set.done||[]).includes(p.key));
     const show=dated[0]||ps[0];
-    let html=dcell(set,a,show);
+    let html=dcell(set,a,show,sc);
     const extraCount=dated.length>1?dated.length-1:0;
     if(extraCount>0) html=html.replace('</span>',` <span class="more">+${extraCount}</span></span>`);
     cells+=html;
   });
-  el.innerHTML=stHtml(a)+`<span class="pn">${esc(set.pattern)}</span>`+cells;
+  el.innerHTML=stHtml(a)+pnHtml(set)+cells;
   el.addEventListener('click',()=>openDetail(set.id));
   return el;
 }
@@ -511,7 +671,7 @@ function renderEmpty(noData){
 const scrim=$('scrim');
 function showModal(){ scrim.classList.add('show'); }
 function closeModal(){ scrim.classList.remove('show'); editingId=null; confirmCb=null; confirmReturn=null; }
-function showPane(which){ ['detailBody','editBody','catBody','confirmBody'].forEach(p=>$(p).classList.toggle('hide',p!==which)); }
+function showPane(which){ ['detailBody','editBody','catBody','stagesBody','confirmBody'].forEach(p=>$(p).classList.toggle('hide',p!==which)); }
 
 /* ---------- detail ---------- */
 function openDetail(id){
@@ -534,29 +694,57 @@ function openDetail(id){
     meter=`<div class="meter"><span class="zone" style="width:${zone}%"></span>${ticks}</div><div class="meter-cap">spread ${a.spread}d · window ${a.win}d</div>`;
   }
 
+  const sc=schedule(set);
   let comps='';
   a.parts.forEach(p=>{
     const c=a.cells[p.key], long=fmtLong((set.dates||{})[p.key]);
     const done=(set.done||[]).includes(p.key);
-    const valCls = done?'dn':(c.state==='bad'?'late':'');
-    const valTxt = long || 'not set';
-    const gap = c.state==='empty' ? '' : (c.gap===0?'earliest':'+'+c.gap+'d');
+    const sb=sc.partStartBy && sc.partStartBy[p.key];
+    let valHtml, valCls;
+    if(done){ valHtml='✓ done'; valCls='dn'; }
+    else if(long){ valHtml=long; valCls=(c.state==='bad'?'late':''); }
+    else if(sb){ valHtml='▸ start by '+fmtLong(dateStr(sb)); valCls='pred'; }
+    else { valHtml='not set'; valCls='empty'; }
+    const procs=partVarStages(set,p.key).map(v=>esc(v.name)).join(' + ');
+    const leadTxt = partDays(p) ? `${partDays(p)}d make${procs?' + '+procs:''}` : (procs||'');
     comps+=`<div class="d-comp">
-      <span class="lab">${esc(p.label)} ${p.optional?'<em>· extra</em>':''}</span>
-      <span class="val ${valCls} ${long?'':'empty'}">${valTxt}</span>
-      <span class="gap ${c.state==='bad'?'late':''}">${gap}</span>
+      <span class="lab">${esc(p.label)} ${p.optional?'<em>· extra</em>':''}${leadTxt?`<br><em class="pl-sub">${leadTxt}</em>`:''}</span>
+      <span class="val ${valCls}">${valHtml}</span>
       <button class="ck-btn ${done?'on':''}" data-key="${p.key}" title="Mark done">✓</button>
     </div>`;
   });
 
+  let sched='';
+  {
+    let delayChip='';
+    if(sc.delay!=null){
+      if(sc.delay>0) delayChip=`<span class="dl-chip r">${sc.delay}d late</span>`;
+      else if(sc.delay<0) delayChip=`<span class="dl-chip g">${-sc.delay}d early</span>`;
+      else delayChip=`<span class="dl-chip g">on time</span>`;
+    } else if(sc.disp && !sc.allReq){ delayChip=`<span class="dl-chip w">in progress</span>`; }
+    const fixBits=(state.stages||[]).map(st=>esc(st.name)+' '+(parseInt(st.days,10)||0)+'d');
+    sched=`<div class="sched">
+      <div class="sched-h">Schedule ${delayChip}</div>
+      <div class="sched-grid">
+        <div class="sk">Start by (whole design)</div><div class="sv${sc.startBy?' hl':''}">${sc.startBy?fmtLong(dateStr(sc.startBy)):'—'}</div>
+        <div class="sk">Ready by (expected)</div><div class="sv">${sc.expectedReady?fmtLong(dateStr(sc.expectedReady)):'—'}</div>
+        <div class="sk">Actual ready</div><div class="sv${sc.delay>0?' late':''}">${sc.actualReady?fmtLong(dateStr(sc.actualReady)):(sc.allReq?'—':'not complete')}</div>
+        <div class="sk">Dispatch by</div><div class="sv">${sc.disp?fmtLong(set.dispatch):'<span class="sfaint">set a date in Edit</span>'}</div>
+      </div>
+      <div class="sched-foot">Longest piece path ${sc.maxLead}d (make + its processes) · Fixed ${fixBits.length?fixBits.join(', '):'none'} · Buffer ${sc.buffer}d<br><b>${sc.lead+sc.buffer}d</b> total start→dispatch</div>
+    </div>`;
+  }
+
   $('detailBody').innerHTML=`
-    <div class="d-top"><span class="d-pn">${esc(set.pattern)}</span><span class="d-cat">${esc(a.cat.name)}</span>${badge}</div>
+    <div class="d-top"><span class="d-pn${set.priority?' pri':''}">${esc(set.pattern)}</span><span class="d-cat">${esc(a.cat.name)}</span><button class="pri-toggle ${set.priority?'on':''}" id="dPriority" title="Mark priority">★</button>${badge}</div>
     ${meter}
     <div>${comps}</div>
+    ${sched}
     ${set.note?`<div class="d-note"><div class="nl">Note</div>${esc(set.note)}</div>`:''}
     <div class="mfoot"><button class="btn danger" id="dDelete">Delete</button><button class="btn primary" id="dEdit">Edit</button></div>`;
 
   $('detailBody').querySelectorAll('.ck-btn').forEach(b=>b.addEventListener('click',()=>toggleDone(id,b.dataset.key)));
+  $('dPriority').addEventListener('click',()=>togglePriority(id));
   $('dEdit').addEventListener('click',()=>openEdit(id));
   $('dDelete').addEventListener('click',deleteSet);
   showModal();
@@ -568,20 +756,40 @@ function toggleDone(id,key){
   if(i>=0) set.done.splice(i,1); else set.done.push(key);
   save(); cloudWriteSet(set); openDetail(id); render();
 }
+function togglePriority(id){
+  const set=state.sets.find(s=>s.id===id); if(!set) return;
+  set.priority=!set.priority;
+  save(); cloudWriteSet(set); openDetail(id); render();
+}
 
 /* ---------- edit ---------- */
 function renderPartsArea(cat, set){
   const area=$('partsArea'); area.innerHTML='';
   if(!cat || !cat.parts.length){ area.innerHTML='<div style="color:var(--faint);font-size:13px;padding:8px 0">This category has no pieces. Add some in Manage categories.</div>'; return; }
+  const lib=state.variableStages||[];
   cat.parts.forEach(p=>{
     const dateVal=set?((set.dates||{})[p.key]||''):'';
     const done=set?((set.done||[]).includes(p.key)):false;
+    const chosen=set?(((set.partVars||{})[p.key])||[]):[];
+    const block=document.createElement('div'); block.className='pf-block'; block.dataset.key=p.key;
     const row=document.createElement('div'); row.className='pf-row';
-    row.innerHTML=`<span class="pf-lab">${esc(p.label)} ${p.optional?'<em>· extra</em>':''}</span>
+    row.innerHTML=`<span class="pf-lab">${esc(p.label)} ${partDays(p)?`<em>· ${partDays(p)}d</em>`:''} ${p.optional?'<em>· extra</em>':''}</span>
       <input type="date" data-key="${p.key}" value="${dateVal}">
       <button type="button" class="ck-btn ${done?'on':''}" data-key="${p.key}" title="Mark done">✓</button>`;
     row.querySelector('.ck-btn').addEventListener('click',function(){ this.classList.toggle('on'); });
-    area.appendChild(row);
+    block.appendChild(row);
+    if(lib.length){
+      const vwrap=document.createElement('div'); vwrap.className='pf-vars';
+      lib.forEach(v=>{
+        const on=chosen.includes(v.id);
+        const b=document.createElement('button'); b.type='button'; b.className='vchip sm'+(on?' on':''); b.dataset.id=v.id;
+        b.innerHTML=`${esc(v.name)} <span class="vd">${parseInt(v.days,10)||0}d</span>`;
+        b.addEventListener('click',function(){ this.classList.toggle('on'); });
+        vwrap.appendChild(b);
+      });
+      block.appendChild(vwrap);
+    }
+    area.appendChild(block);
   });
 }
 function openEdit(id){
@@ -594,22 +802,30 @@ function openEdit(id){
   sel.value=catId;
   $('fPattern').value=set?set.pattern:'';
   $('fNote').value=set?(set.note||''):'';
+  $('fPriority').classList.toggle('on', !!(set&&set.priority));
+  $('fDispatch').value=set?(set.dispatch||''):'';
   renderPartsArea(getCat(sel.value), set);
   showModal();
   if(!set) setTimeout(()=>$('fPattern').focus(),60);
 }
 $('fCat').addEventListener('change',e=>{ renderPartsArea(getCat(e.target.value), editingId?state.sets.find(s=>s.id===editingId):null); });
+$('fPriority').addEventListener('click',function(){ this.classList.toggle('on'); });
 
 function saveSet(){
   const pattern=$('fPattern').value.trim();
   if(!pattern){ toast('Pattern no. is required'); $('fPattern').focus(); return; }
   const catId=$('fCat').value; const cat=getCat(catId);
-  const dates={}, done=[];
-  $('partsArea').querySelectorAll('input[type=date]').forEach(inp=>{ if(inp.value) dates[inp.dataset.key]=inp.value; });
-  $('partsArea').querySelectorAll('.ck-btn.on').forEach(b=>{ done.push(b.dataset.key); });
-  const data={pattern,catId,dates,done,note:$('fNote').value.trim()};
+  const dates={}, done=[], partVars={};
+  $('partsArea').querySelectorAll('.pf-block').forEach(bl=>{
+    const key=bl.dataset.key;
+    const dinp=bl.querySelector('input[type=date]'); if(dinp && dinp.value) dates[key]=dinp.value;
+    if(bl.querySelector('.ck-btn.on')) done.push(key);
+    const chosen=[]; bl.querySelectorAll('.vchip.on').forEach(c=>chosen.push(c.dataset.id));
+    if(chosen.length) partVars[key]=chosen;
+  });
+  const data={pattern,catId,dates,done,partVars,note:$('fNote').value.trim(),priority:$('fPriority').classList.contains('on'),dispatch:$('fDispatch').value||''};
   let theSet;
-  if(editingId){ theSet=state.sets.find(x=>x.id===editingId); Object.assign(theSet,data); toast('Set updated'); }
+  if(editingId){ theSet=state.sets.find(x=>x.id===editingId); delete theSet.varStages; Object.assign(theSet,data); toast('Set updated'); }
   else { theSet={id:uid('s'),...data}; state.sets.push(theSet); toast('Set added'); }
   save(); cloudWriteSet(theSet); closeModal(); render();
 }
@@ -621,6 +837,32 @@ function deleteSet(){
     save(); cloudDeleteSet(id); closeModal(); render(); toast('Set deleted');
   }, 'Delete', ()=>openDetail(id));
 }
+
+/* ---------- stage editor (shared by settings + category cards) ---------- */
+function buildStages(container, list, afterChange){
+  container.innerHTML='';
+  list.forEach(st=>{
+    const row=document.createElement('div'); row.className='part-line';
+    row.innerHTML=`<input class="pl-lab st-name" value="${esc(st.name)}" placeholder="Stage name">
+      <input class="st-days" type="number" min="0" max="120" value="${parseInt(st.days,10)||0}"> <span class="st-d">d</span>
+      <button class="px" title="Remove stage">✕</button>`;
+    row.querySelector('.st-name').addEventListener('change',e=>{ st.name=e.target.value.trim()||st.name; afterChange(); });
+    row.querySelector('.st-days').addEventListener('change',e=>{ st.days=parseInt(e.target.value,10)||0; afterChange(); });
+    row.querySelector('.px').addEventListener('click',()=>{ const i=list.indexOf(st); if(i>=0)list.splice(i,1); afterChange(); buildStages(container,list,afterChange); });
+    container.appendChild(row);
+  });
+  const add=document.createElement('button'); add.className='addpart'; add.textContent='+ Add stage';
+  add.addEventListener('click',()=>{ list.push({id:uid('stg'),name:'',days:1}); afterChange(); buildStages(container,list,afterChange); });
+  container.appendChild(add);
+}
+function openStages(){
+  $('modalTitle').textContent='Production stages'; showPane('stagesBody');
+  $('fBuffer').value=state.buffer;
+  buildStages($('baseStages'), state.stages, ()=>{ save(); render(); });
+  buildStages($('varStagesList'), state.variableStages, ()=>{ save(); render(); });
+  showModal();
+}
+$('fBuffer')?.addEventListener('change',e=>{ let v=parseInt(e.target.value,10); if(isNaN(v)||v<0)v=0; state.buffer=v; save(); render(); });
 
 /* ---------- category manager ---------- */
 function openCatMgr(){
@@ -634,12 +876,14 @@ function renderCatList(){
     cat.parts.forEach(p=>{
       parts+=`<div class="part-line" data-key="${p.key}">
         <input class="pl-lab" value="${esc(p.label)}" placeholder="Piece name">
+        <input class="pl-days" type="number" min="0" max="120" value="${parseInt(p.days,10)||0}" title="Make-time (days)"><span class="st-d">d</span>
         <select class="pl-role">${ROLES.map(r=>`<option value="${r.v}" ${p.role===r.v?'selected':''}>${r.t}</option>`).join('')}</select>
         <label class="opt"><input type="checkbox" class="pl-opt" ${p.optional?'checked':''}> extra</label>
         <button class="px" title="Remove piece">✕</button>
       </div>`;
     });
     card.innerHTML=`<div class="cc-top"><input class="cc-name" value="${esc(cat.name)}"><button class="del" title="Delete category">🗑</button></div>
+      <div class="cc-hint">piece · make-days · role</div>
       <div class="parts">${parts}</div>
       <button class="addpart">+ Add piece</button>`;
     // name
@@ -654,11 +898,12 @@ function renderCatList(){
     card.querySelectorAll('.part-line').forEach(line=>{
       const key=line.dataset.key; const part=cat.parts.find(p=>p.key===key);
       line.querySelector('.pl-lab').addEventListener('change',e=>{ part.label=e.target.value.trim()||part.label; save(); render(); });
+      line.querySelector('.pl-days').addEventListener('change',e=>{ part.days=parseInt(e.target.value,10)||0; save(); render(); });
       line.querySelector('.pl-role').addEventListener('change',e=>{ part.role=e.target.value; save(); render(); });
       line.querySelector('.pl-opt').addEventListener('change',e=>{ part.optional=e.target.checked; save(); render(); });
       line.querySelector('.px').addEventListener('click',()=>{ askConfirm('Remove piece "'+(part.label||'this piece')+'" from '+cat.name+'?', ()=>{ cat.parts=cat.parts.filter(p=>p.key!==key); save(); render(); openCatMgr(); }, 'Remove', ()=>openCatMgr()); });
     });
-    card.querySelector('.addpart').addEventListener('click',()=>{ cat.parts.push({key:uid('p'),label:'',role:'extra',optional:true}); save(); renderCatList(); });
+    card.querySelector('.addpart').addEventListener('click',()=>{ cat.parts.push({key:uid('p'),label:'',role:'extra',optional:true,days:1}); save(); renderCatList(); });
     list.appendChild(card);
   });
 }
@@ -703,6 +948,8 @@ const menu=$('menu');
 $('menuBtn').addEventListener('click',e=>{ e.stopPropagation(); menu.classList.toggle('show'); });
 document.addEventListener('click',e=>{ if(!menu.contains(e.target)&&e.target!==$('menuBtn')) menu.classList.remove('show'); });
 $('catMgrBtn').addEventListener('click',()=>{ menu.classList.remove('show'); openCatMgr(); });
+$('stagesBtn').addEventListener('click',()=>{ menu.classList.remove('show'); openStages(); });
+$('stagesDoneBtn').addEventListener('click',closeModal);
 $('sampleBtn').addEventListener('click',()=>{ menu.classList.remove('show'); const go=()=>{ state.categories=defaultCategories(); state.sets=sampleData(); save(); cloudReplaceAll(); closeModal(); render(); toast('Sample data loaded'); }; if(state.sets.length) askConfirm('Replace current sets with sample data?', go, 'Replace'); else go(); });
 $('clearBtn').addEventListener('click',()=>{ menu.classList.remove('show'); askConfirm('Delete ALL '+state.sets.length+' sets? Categories are kept. This cannot be undone.', ()=>{ const ids=state.sets.map(s=>s.id); state.sets=[]; save(); cloudDeleteMany(ids); closeModal(); render(); toast('All sets cleared'); }, 'Delete all'); });
 $('exportBtn').addEventListener('click',()=>{ menu.classList.remove('show'); const blob=new Blob([JSON.stringify({sets:state.sets,categories:state.categories,window:state.window},null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='set-tracker-'+new Date().toISOString().slice(0,10)+'.json'; a.click(); URL.revokeObjectURL(a.href); toast('Exported'); });
@@ -717,10 +964,10 @@ function setSync(s){
   chip.className='sync '+(s==='synced'?'synced':s==='offline'?'offline':s==='error'?'error':s==='connecting'?'connecting':'local');
   lab.textContent = s==='synced'?'Synced':s==='offline'?'Offline':s==='error'?'Sync error':s==='connecting'?'Connecting…':'Local';
 }
-function cloudWriteSet(set){ if(!cloud.on)return; try{ const {doc,setDoc}=cloud.fns; setDoc(doc(cloud.db,'sets',set.id), {pattern:set.pattern,catId:set.catId,dates:set.dates||{},done:set.done||[],note:set.note||''}).catch(()=>setSync('error')); }catch(e){} }
+function cloudWriteSet(set){ if(!cloud.on)return; try{ const {doc,setDoc}=cloud.fns; setDoc(doc(cloud.db,'sets',set.id), {pattern:set.pattern,catId:set.catId,dates:set.dates||{},done:set.done||[],note:set.note||'',priority:!!set.priority,dispatch:set.dispatch||'',partVars:set.partVars||{}}).catch(()=>setSync('error')); }catch(e){} }
 function cloudDeleteSet(id){ if(!cloud.on)return; try{ const {doc,deleteDoc}=cloud.fns; deleteDoc(doc(cloud.db,'sets',id)).catch(()=>setSync('error')); }catch(e){} }
 function cloudDeleteMany(ids){ (ids||[]).forEach(cloudDeleteSet); }
-function cloudWriteMeta(){ if(!cloud.on)return; try{ const {doc,setDoc}=cloud.fns; setDoc(doc(cloud.db,'meta','config'), {categories:state.categories, window:state.window}).catch(()=>setSync('error')); }catch(e){} }
+function cloudWriteMeta(){ if(!cloud.on)return; try{ const {doc,setDoc}=cloud.fns; setDoc(doc(cloud.db,'meta','config'), {categories:state.categories, stages:state.stages, variableStages:state.variableStages, buffer:state.buffer, window:state.window}).catch(()=>setSync('error')); }catch(e){} }
 function cloudReplaceAll(){ if(!cloud.on)return; (cloud.knownIds||[]).slice().forEach(cloudDeleteSet); state.sets.forEach(cloudWriteSet); cloudWriteMeta(); }
 
 async function initCloud(){
@@ -754,7 +1001,7 @@ function subscribeCloud(){
     render();
   }, err=>{ console.warn(err); setSync('error'); });
   onSnapshot(doc(cloud.db,'meta','config'), snap=>{
-    if(snap.exists()){ const d=snap.data(); if(Array.isArray(d.categories)&&d.categories.length) state.categories=d.categories; if(d.window){ state.window=d.window; $('windowInput').value=d.window; } render(); }
+    if(snap.exists()){ const d=snap.data(); if(Array.isArray(d.categories)&&d.categories.length) state.categories=d.categories; if(Array.isArray(d.stages)) state.stages=d.stages; if(Array.isArray(d.variableStages)) state.variableStages=d.variableStages; if(d.buffer!=null) state.buffer=d.buffer; if(d.window){ state.window=d.window; $('windowInput').value=d.window; } render(); }
   }, ()=>{});
 }
 $('syncChip').addEventListener('click',()=>{
