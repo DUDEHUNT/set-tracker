@@ -161,7 +161,7 @@ button{font-family:inherit}
 <body>
 
 <header class="bar">
-  <h1>POGO · Photo Dispatch<small>sheet-driven · footer rates · WhatsApp · v2.0</small></h1>
+  <h1>POGO · Photo Dispatch<small>sheet-driven · footer rates · WhatsApp · v2.1</small></h1>
   <button class="iconbtn" id="btnData">Data</button>
   <button class="iconbtn" id="btnReload">Reload</button>
 </header>
@@ -805,6 +805,45 @@ $("pCancel").addEventListener("click",()=>{cancelFlag=true;});
 $("btnReload").addEventListener("click",()=>{ blobCache.clear(); loadSheet(); });
 $("btnData").addEventListener("click",openData);
 document.querySelectorAll("[data-close]").forEach(x=>x.addEventListener("click",()=>$(x.dataset.close).classList.remove("show")));
+
+/* ---------- freshness: silent data refresh + self-update check ---------- */
+const APP_V = "2.1";
+let lastVCheck = 0;
+async function refreshData(){
+  try{
+    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_TAB)}`;
+    const r = await fetch(url,{cache:"no-store"});
+    if(!r.ok) return;
+    parseRows(parseCSV(await r.text()));
+    loadedAt = new Date();
+    const ids = new Set(rows.map(d=>d.key));
+    selected = new Set([...selected].filter(k=>ids.has(k)));
+    const kept = [...viewRank.keys()].filter(k=>ids.has(k));
+    const keptSet = new Set(kept);
+    viewRank = new Map(kept.concat(shuffle(rows.map(d=>d.key).filter(k=>!keptSet.has(k)))).map((k,i)=>[k,i]));
+    blobCache.clear();
+    buildCatRail(); render();
+    banner("Sheet refreshed · "+loadedAt.toLocaleTimeString(),"info");
+    setTimeout(()=>{ if($("banner").textContent.indexOf("Sheet refreshed")===0) banner(""); },4000);
+  }catch(e){}
+}
+async function checkAppVersion(){
+  const now = Date.now();
+  if(now - lastVCheck < 10*60*1000) return;
+  lastVCheck = now;
+  try{
+    const t = await (await fetch(location.pathname+"?vchk="+now,{cache:"no-store"})).text();
+    const m = t.match(/WhatsApp · v([\d.]+)/);
+    if(m && m[1] !== APP_V){
+      banner(`New app version v${m[1]} is live — <b style="cursor:pointer;text-decoration:underline" onclick="location.replace(location.pathname+'?u='+Date.now())">tap to load it</b>`,"info");
+    }
+  }catch(e){}
+}
+document.addEventListener("visibilitychange",()=>{
+  if(document.visibilityState !== "visible") return;
+  if(loadedAt && (Date.now() - loadedAt.getTime() > 5*60*1000)) refreshData();
+  checkAppVersion();
+});
 
 loadSheet();
 </script>
