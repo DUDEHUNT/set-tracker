@@ -109,6 +109,8 @@ button{font-family:inherit}
 .card .meta{padding:8px 10px 10px}
 .card .nm{font-size:13.5px;font-weight:800;line-height:1.2}
 .card .sz{font-size:11.5px;color:var(--ink-soft);margin-top:3px}
+.card .stk{font-size:11px;color:var(--ink-soft);margin-top:3px}
+.card .stk b.pd{color:#B45309;font-weight:800}
 .card.bad .ph::after{content:"⚠ image failed";position:absolute;inset:auto 0 0 0;background:var(--danger);color:#fff;font-size:11px;text-align:center;padding:3px}
 .empty{padding:60px 24px;text-align:center;color:var(--ink-soft);font-size:14.5px;line-height:1.6}
 .empty b{color:var(--ink)}
@@ -159,7 +161,7 @@ button{font-family:inherit}
 <body>
 
 <header class="bar">
-  <h1>POGO · Photo Dispatch<small>sheet-driven · footer rates · WhatsApp · v1.9</small></h1>
+  <h1>POGO · Photo Dispatch<small>sheet-driven · footer rates · WhatsApp · v2.0</small></h1>
   <button class="iconbtn" id="btnData">Data</button>
   <button class="iconbtn" id="btnReload">Reload</button>
 </header>
@@ -244,7 +246,7 @@ const MAX_EDGE = 2048, JPG_Q = 0.92, WA_BATCH = 100, SHARE_MAX = 10; /* WA Andro
 let rows = [];            // parsed designs
 let skipped = [];         // rows dropped + reason
 let rateRanges = [];      // ranges that have a rate column
-let diagSizesCol = -1, diagBadSizes = [], diagHeaders = [];
+let diagSizesCol = -1, diagBadSizes = [], diagHeaders = [], diagStockCol = -1, diagStockRows = 0;
 let loadedAt = null;
 let selCats = new Set();
 let q = "";
@@ -363,7 +365,7 @@ async function loadSheet(){
   buildCatRail(); render();
 }
 function parseRows(table){
-  rows=[]; skipped=[]; rateRanges=[]; diagBadSizes=[]; diagSizesCol=-1;
+  rows=[]; skipped=[]; rateRanges=[]; diagBadSizes=[]; diagSizesCol=-1; diagStockCol=-1; diagStockRows=0;
   if(!table.length) return;
   const H = table[0].map(low);
   const col = re => H.findIndex(h=>re.test(h));
@@ -374,6 +376,7 @@ function parseRows(table){
   const cName = col(/photo\s*name|design\s*name|article/);
   const cCol  = col(/^colou?r/);
   const cStk = col(/^sizestock/);
+  diagStockCol = cStk;
   let cSz   = col(/^sizes?$/);
   if(cSz<0) cSz = H.findIndex(x=>/size/.test(x) && !/rate/.test(x));
   diagSizesCol = cSz;
@@ -418,6 +421,7 @@ function parseRows(table){
       const m=t.trim().match(/^(\d+-\d+):(\d+):(\d+)$/);
       if(m) stock[m[1]]={sets:+m[2],pend:+m[3]};
     }); }
+    if(Object.keys(stock).length) diagStockRows++;
     let kkey=id; if(seenIds.has(kkey)) kkey=id+"#"+i; seenIds.add(kkey);
     rows.push({key:kkey, idx:i, id, cat, isNew:label==="NEW", url, name:name||id, designNo, colorTxt, sizes, rates, stock, failed:false});
   }
@@ -472,12 +476,17 @@ function render(){
   else{
     g.innerHTML = P.map(d=>{
       const thumb = d.url.includes("res.cloudinary.com") ? d.url.replace("/upload/","/upload/w_420,q_auto,f_auto/") : d.url;
+      const stkTxt = d.sizes.filter(s=>d.stock&&d.stock[s]).map(s=>{
+        const t=d.stock[s];
+        return `${s}: ${t.sets}s${t.pend?`<b class="pd"> ·P${t.pend}</b>`:""}`;
+      }).join("&nbsp;&nbsp;&nbsp;");
       return `<div class="card${selected.has(d.key)?" sel":""}" data-k="${d.key}">
         <div class="ph">${d.isNew?'<span class="newpill">NEW</span>':""}
           <img loading="lazy" src="${thumb}" alt="${d.name}" onerror="this.closest('.card').classList.add('bad')">
           <div class="tick"><span>✓</span></div></div>
         <div class="meta"><div class="nm">${d.designNo}${d.colorTxt?" · "+d.colorTxt:""}</div>
-        <div class="sz">${d.sizes.join("  ")}</div></div></div>`;
+        <div class="sz">${d.sizes.join("  ")}</div>
+        ${stkTxt?`<div class="stk">${stkTxt}</div>`:""}</div></div>`;
     }).join("");
   }
   const n = [...selected].filter(k=>P.some(d=>d.key===k)).length;
@@ -703,7 +712,8 @@ function openData(){
   rows.forEach(d=>{ const p=perCat[d.cat]=perCat[d.cat]||{n:0,o:0}; d.isNew?p.n++:p.o++; });
   let html=`<div class="rowline"><span>Designs loaded</span><b>${rows.length}</b></div>
     <div class="rowline"><span>Rate columns found</span><b>${rateRanges.length? rateRanges.join(", "):"none yet"}</b></div>
-    <div class="rowline"><span>Sizes column</span><b>${diagSizesCol>=0?"found ✓":"NOT FOUND"}</b></div>`;
+    <div class="rowline"><span>Sizes column</span><b>${diagSizesCol>=0?"found ✓":"NOT FOUND"}</b></div>
+    <div class="rowline"><span>SizeStock column</span><b>${diagStockCol>=0? "found ✓ · "+diagStockRows+" designs":"NOT FOUND — run Modifier v6 once"}</b></div>`;
   html+=`<div class="small">Headers seen: ${diagHeaders.join("  |  ")||"—"}</div>`;
   if(rows.length){
     html+=`<div class="small">First rows parsed as: ${rows.slice(0,3).map(d=>d.designNo+" → "+d.sizes.join(", ")).join("  ·  ")}</div>`;
